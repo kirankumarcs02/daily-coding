@@ -35,34 +35,27 @@ alphabets = {
     26:"z"
 }
 
+allMessages = []
 
-def encoded_message_count(message):
-    str_message = str(message)
-    if str_message[0] == '0':
-        return 'INVALID message'
-    else :
-        return message_count(str_message)
-
-
-decode_message = []
-
-def message_count(message):
-    if len(message) == 1:
-        count = 1
-    elif len(message) == 2:
-        if int(message) < 27 and int(message) > 0:
-            count=2
+def decode(parsed, remaining):
+    if remaining == "":
+        if parsed not in allMessages:
+            allMessages.append(''.join(parsed))
         else:
-            count=1
-    else:
-        count = message_count(message[1:])
-        print(message[:2])
-        if int(message[:2]) < 27 and int(message[:2]) > 0:
-            count += message_count(message[2:])
+            print(parsed)
+        return
 
-    return count
+    singleDigit = int(remaining[0])
+    if singleDigit in range(1,27):
+        decode(parsed+[alphabets[singleDigit]], remaining[1:])
 
+    if len(remaining)>1:
+        twoDigits = int(remaining[0:2])
+        if twoDigits in range(1,27):
+            decode(parsed+[alphabets[twoDigits]], remaining[2:])
 
-if __name__ == '__main__':
-    print(encoded_message_count(145))
-
+if __name__ == "__main__":
+    message = '2621'
+    decode([], message)
+    print(allMessages)
+    print(len(allMessages))
