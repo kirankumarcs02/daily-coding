@@ -13,5 +13,7 @@ def get_largest_sum_non_adj(array):
         previous, largest = largest, max(largest, previous + amount)
     return largest
 
-print(get_largest_sum_non_adj([2, 4, 6, 8]))
-print(get_largest_sum_non_adj([5, 10, 1, 6]))
+
+if __name__ == "__main__":
+    print(get_largest_sum_non_adj([2, 4, 6, 8]))
+    print(get_largest_sum_non_adj([5, 10, 1, 6]))
